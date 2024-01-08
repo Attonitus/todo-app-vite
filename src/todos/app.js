@@ -34,11 +34,24 @@ export const App = (elementID) => {
         todoStore.addTodo(e.target.value);
         displayTodos();
         e.target.value = '';
-    })
+    });
 
     todoListUl.addEventListener("click", e => {
         const element = e.target.closest('[data-id');
         todoStore.toggleTodo(element.getAttribute('data-id'));
         displayTodos();
-    })
+    });
+
+    todoListUl.addEventListener("click", e => {
+        console.log(e.target);
+        console.log(e.target.className);
+
+        const isDestroy = e.target.className === 'destroy';
+        const element = e.target.closest('[data-id');
+
+        if(!element || !isDestroy) return;
+
+        todoStore.deleteTodo(element.getAttribute('data-id'));
+        displayTodos();
+    });
 }
